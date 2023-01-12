@@ -24,6 +24,9 @@ export default class Player extends AbstractPlayer {
     public hSpeed: number;
     public vSpeed: number;
     public facing: number; //angle char is facing
+    public x: number;
+    public y: number;
+    public z: number;
 
     // locks are used to prevent user from spamming the key by holding it
     private jumpingLock: boolean;
@@ -40,7 +43,10 @@ export default class Player extends AbstractPlayer {
         this.vSpeed = 0;
         this.prevOnGroundDir = MoveDirection.IDLE;
         this.controls = new Controls();
-        this.facing = 2; //south
+        this.facing = Math.PI; //south
+        this.x = 20 * 4;
+        this.y = 1;
+        this.z = 20 * 4;
     }
 
     public async build() {
@@ -49,6 +55,7 @@ export default class Player extends AbstractPlayer {
         this.camera = new PlayerCamera(this);
         this.checkPoint = new CheckPoint(this);
         this.audioManager = this.level.audioManager;
+        this.audioManager.playCity(true);
     }
 
     public respawn() {
@@ -118,10 +125,6 @@ export default class Player extends AbstractPlayer {
     }
 
     private handlePlayerMovement(keys: IKeys, deltaTime: number, canStand: boolean, onGround: boolean, onCeiling: boolean, moveDirection: MoveDirection) {
-        // rotate mesh based on camera movement
-
-        //this.mesh.get().rotation.y = this.facing;
-
         switch (moveDirection) {
             case MoveDirection.UP:
                 this.facing = 0;
@@ -153,9 +156,13 @@ export default class Player extends AbstractPlayer {
 
         // perform the movement
         this.mesh.get().moveWithCollisions(moveVector);
+
+        //const TILE_SIZE = 4;
+        //this.mesh.get().position = new Vector3(this.x * TILE_SIZE, 4, this.z * TILE_SIZE);
     }
 
     private setHorizontalMovement(moveVector: Vector3, currMoveDir: MoveDirection, onGround: boolean) {
+
         let moveDir;
         if (onGround) {
             moveDir = currMoveDir;
@@ -164,8 +171,11 @@ export default class Player extends AbstractPlayer {
             moveDir = this.prevOnGroundDir;
         }
 
+        const currentV = new Vector3(this.x, this.y, this.z);
         const temp = this.getMoveVectorFromMoveDir(moveDir);
         moveVector.set(temp.x, temp.y, temp.z);
+
+        this.level.setCoords(temp.x + " / " + temp.z);
 
         // set hSpeed according to crouch
         if (this.crouching) {

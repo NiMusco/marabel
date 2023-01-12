@@ -40,13 +40,13 @@ export default abstract class AbstractPlayer {
         // start by standing up
         this.mesh = this.standMesh;
         this.crouchMesh.setEnabled(false);
-        this.mesh.get().position = this.level.spawn.spawnPoint.clone();
+        //this.mesh.get().position = this.level.spawn.spawnPoint.clone();
     }
 
     public respawn() {
         // set position and switch mesh
-        this.standMesh.get().position = this.level.spawn.spawnPoint.clone();
-        this.crouchMesh.get().position = this.level.spawn.spawnPoint.clone();
+        //this.standMesh.get().position = this.level.spawn.spawnPoint.clone();
+        //this.crouchMesh.get().position = this.level.spawn.spawnPoint.clone();
         this.switchMesh(false);
         this.crouching = false;
     }

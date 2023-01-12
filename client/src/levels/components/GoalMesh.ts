@@ -53,7 +53,7 @@ export default class GoalMesh {
         goalText.textWrapping = true;
         goalText.lineSpacing = 15;
         goalText.text = "Congratulations, you beat the map!\nYour final time was " +
-            this.level.startLevelTimer.timeSpent.toFixed(1) + " seconds.\nYour current position on the leaderboard: 1st";
+            /*this.level.startLevelTimer.timeSpent.toFixed(1)*/ + " seconds.\nYour current position on the leaderboard: 1st";
         goalText.color = "white";
         goalText.fontSize = 24;
         goalText.widthInPixels = 550;

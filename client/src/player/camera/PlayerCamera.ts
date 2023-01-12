@@ -12,8 +12,8 @@ const CAMERA_STAND_OFFSET = 0.35 * AbstractPlayer.HEIGHT; // half of height woul
 const CAMERA_CROUCH_OFFSET = CAMERA_STAND_OFFSET * AbstractPlayer.CROUCH_Y_SCALING;
 
 // Configuration for ArcRotateCamera
-const THIRD_PERSON_ALPHA_OFFSET = - 0.5 * Math.PI;
-const THIRD_PERSON_BETA_OFFSET = 0.3 * Math.PI;
+const THIRD_PERSON_ALPHA_OFFSET = 0.5 * Math.PI;
+const THIRD_PERSON_BETA_OFFSET = 0.2 * Math.PI;
 
 enum Perspective {
     FIRST_PERSON,
@@ -46,7 +46,7 @@ export default class PlayerCamera {
     }
 
     private setupFirstPersonCamera() {
-        this.firstPersonCamera = new UniversalCamera("playerfirstperson", this.player.spawn.spawnPoint.clone(), this.player.level.scene);
+        this.firstPersonCamera = new UniversalCamera("playerfirstperson", this.player.getPosition().clone(), this.player.level.scene);
         this.firstPersonCamera.attachControl(Game.canvas, true);
         this.firstPersonCamera.inertia = 0.1;
         this.firstPersonCamera.angularSensibility = 800;
@@ -59,7 +59,7 @@ export default class PlayerCamera {
         const alpha = -0.5 * Math.PI;
         const beta = 0.5 * Math.PI;
         const distance = 60;
-        this.thirdPersonCamera = new ArcRotateCamera("playerthirdperson", alpha, beta, distance, this.player.spawn.spawnPoint.clone(), this.scene);
+        this.thirdPersonCamera = new ArcRotateCamera("playerthirdperson", alpha, beta, distance, this.player.getPosition().clone(), this.scene);
         const cam = this.thirdPersonCamera;
         this.scene.activeCameras.push(cam);
 
@@ -97,13 +97,13 @@ export default class PlayerCamera {
 
     private resetFirstPersonCamera() {
         // set target to view direction
-        this.firstPersonCamera.position = this.player.spawn.spawnPoint.clone();
-        this.firstPersonCamera.setTarget(this.player.spawn.lookAt.clone());
+        this.firstPersonCamera.position = this.player.getPosition().clone();
+        //this.firstPersonCamera.setTarget(this.player.spawn.lookAt.clone());
     }
 
     private resetThirdPersonCamera() {
         this.thirdPersonCamera.setTarget(this.player.mesh.get());
-        this.thirdPersonCamera.radius = 40;
+        this.thirdPersonCamera.radius = 45;
     }
 
     public update() {

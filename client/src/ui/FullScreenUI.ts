@@ -24,7 +24,7 @@ export default class FullScreenUI {
     }
 
     private addPlayerControlInfo() {
-        const infoFrame = new Rectangle("infoFrame");
+        /*const infoFrame = new Rectangle("infoFrame");
         infoFrame.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_LEFT;
         infoFrame.verticalAlignment = Control.VERTICAL_ALIGNMENT_TOP;
         infoFrame.paddingTop = 15;
@@ -45,7 +45,7 @@ export default class FullScreenUI {
         infoStack.addControl(this.getInfoText("Set to first-person POV with:", "1"));
         infoStack.addControl(this.getInfoText("Set to third-person POV with:", "2"));
         infoStack.addControl(this.getInfoText("To start chatting press:", "ESC"));
-        infoFrame.addControl(infoStack);        
+        infoFrame.addControl(infoStack);*/        
     }
 
     private getInfoText(infoText: string, commandText: string): StackPanel {
