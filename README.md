@@ -9,9 +9,9 @@
 ## How to run
 1. Install [Nodejs](https://nodejs.org/en/).
 2. Install [Typescript](https://www.typescriptlang.org/).
-3. Clone this repo.
-4. Go to `server` directory and run `npm install` followed by `npm run dev` to start the server.
-5. Go to `client` directory and repeat previous step.
+3. Clone this repo and run `yarn install`.
+4. Run `yarn server-dev` to start the server.
+5. Run `yarn client-dev` to start a client.
 6. Should open a window at [localhost:8080](http://localhost:8080/).
 7. And Colyseus monitor at http://localhost:8081/colyseus/#/ (read [more](https://docs.colyseus.io/tools/monitor/))
 
@@ -19,9 +19,9 @@
 
 __Sprint 1: Init__
 - [x] (*): Colyseus + Babylon.js boilerplate.
-- [x] (client): player movement + animations.
+- [x] (*): Movement: client-side prediction + server reconciliation.
 - [ ] (client): GUIs: signup, connect, in-game.
-- [ ] (server): MySQL player create and connect.
+- [x] (server): DB player create and connect.
 
 __Sprint 2: World__
 - [x] (asset): main city to 3D meshes.
